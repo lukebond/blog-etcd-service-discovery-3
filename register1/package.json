@@ -1,0 +1,10 @@
+{
+  "name": "register1",
+  "version": "0.0.0",
+  "main": "index.js",
+  "author": "Luke Bond <luke.n.bond@gmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "node-etcd": "^2.1.1"
+  }
+}
