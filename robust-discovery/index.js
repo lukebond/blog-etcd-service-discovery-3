@@ -5,7 +5,7 @@ var pkgjson = require('./package.json'),
 var etcd = new Etcd();
 
 function etcdDiscover(name, options, callback) {
-  var key = path.join('/', 'services', name);
+  var key = path.posix.join('/', 'services', name);
   etcd.get(key, options, function (err, value) {
     if (err) {
       return callback(err);
@@ -16,7 +16,7 @@ function etcdDiscover(name, options, callback) {
 }
 
 console.log(pkgjson.name + ' is looking for \'myservice\'...');
-etcdDiscover('myservice', {wait: true}, function (err, node, watcher) {
+etcdDiscover('myservice', {wait: false}, function (err, node, watcher) {
   if (err) {
     console.log(err.message);
     process.exit(1);
@@ -24,7 +24,7 @@ etcdDiscover('myservice', {wait: true}, function (err, node, watcher) {
   console.log(pkgjson.name + ' discovered node: ', node);
   watcher
     .on('change', function (data) {
-      console.log('Value changed; new value: ', node);
+      console.log('Value changed; new value: ', data.node);
     })
     .on('expire', function (data) {
       console.log('Value expired.');

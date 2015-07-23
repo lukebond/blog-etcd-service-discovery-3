@@ -5,11 +5,11 @@ var pkgjson = require('./package.json'),
 var etcd = new Etcd();
 
 function etcdRegister() {
-  var p = path.join('/', 'services', 'myservice');
+  var p = path.posix.join('/', 'services', 'myservice');
   etcd.set(p,
     JSON.stringify({
         hostname: '127.0.0.1',
-        port: '3000',
+        port: Math.round(Math.random() * 10000),
         pid: process.pid,
         name: pkgjson.name
       }),
