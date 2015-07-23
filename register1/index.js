@@ -3,7 +3,7 @@ var path = require('path'),
 
 var etcd = new Etcd();
 
-var p = path.join('/', 'services', 'myservice');
+var p = path.posix.join('/', 'services', 'myservice');
 etcd.set(p,
   JSON.stringify({
     hostname: '127.0.0.1',

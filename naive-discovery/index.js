@@ -5,7 +5,7 @@ var pkgjson = require('./package.json'),
 var etcd = new Etcd();
 
 function etcdDiscover(name, options, callback) {
-  etcd.get(path.join('/', 'services', name), options, function (err, value) {
+  etcd.get(path.posix.join('/', 'services', name), options, function (err, value) {
     if (err) {
       return callback(err);
     }
@@ -15,7 +15,7 @@ function etcdDiscover(name, options, callback) {
 }
 
 console.log(pkgjson.name + ' is looking for \'myservice\'...');
-etcdDiscover('myservice', {wait: true}, function (err, node) {
+etcdDiscover('myservice', {wait: false}, function (err, node) {
   if (err) {
     console.log(err.message);
     process.exit(1);
